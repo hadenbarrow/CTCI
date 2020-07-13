@@ -6,12 +6,15 @@ public class Answers {
 	
 	//1.3 Design an algorithm and write code to remove duplicate characters in a string without using any additional buffer.
 	//One or two additional variables are fine. An extra copy of the array is not.
-	
 	public String removeDuplicateCharacters(String input) {
 		for(int i = 0; i < input.length(); i++) {
 			for(int j = 0; j < input.length(); j++) {
 				if(i != j && input.charAt(i) == input.charAt(j)) {
-					input = input.substring(i, j) + input.substring(j+1);
+					String first = input.substring(0,i);
+					String middle = input.substring(i,j);
+					String last = input.substring(j+1);
+					input = first+middle+last;
+					j--;
 				}
 			}
 		}
