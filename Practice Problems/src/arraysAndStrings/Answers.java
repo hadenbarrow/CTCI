@@ -1,8 +1,40 @@
 package arraysAndStrings;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Answers {
+	
+	//1.4 Write a method to decide if two strings are anagrams or not
+	public boolean StringsAreAnagrams(String input1, String input2) {
+		HashMap<Character, Integer> map1 = new HashMap<Character, Integer>();
+		HashMap<Character, Integer> map2 = new HashMap<Character, Integer>();
+		
+		for(int i = 0; i < input1.length(); i++) {
+			char temp = input1.charAt(i);
+			if(map1.containsKey(temp)) {
+				map1.put(temp, map1.get(temp)+1);
+			}else {
+				map1.put(temp, 1);
+			}
+		}
+		
+		for(int i = 0; i < input2.length(); i++) {
+			char temp = input2.charAt(i);
+			if(map2.containsKey(temp)) {
+				map2.put(temp, map2.get(temp)+1);
+			}else {
+				map2.put(temp, 1);
+			}
+		}
+		
+		for(Character c : map1.keySet()) {
+			if(!map2.containsKey(c)) return false;
+			if(map2.get(c) != map1.get(c)) return false;
+		}
+		
+		return true;
+	}
 	
 	//1.3 Design an algorithm and write code to remove duplicate characters in a string without using any additional buffer.
 	//One or two additional variables are fine. An extra copy of the array is not.
@@ -66,6 +98,8 @@ public class Answers {
 		String edgeCase2 = "1"; //false
 		String edgeCase3 = "1122"; //true
 		String cStyle = "This is a normal string&";
+		String anagram1 = "murder";
+		String anagram2 = "redrum";
 		
 		/*
 		 * //1.1a tests System.out.println("---1.1a tests---");
@@ -87,7 +121,11 @@ public class Answers {
 		//System.out.println(answers.reverseString(cStyle));
 		
 		//1.3 tests
-		System.out.println(answers.removeDuplicateCharacters(hasDuplicates));
+		//System.out.println(answers.removeDuplicateCharacters(hasDuplicates));
+		
+		//1.4 tests
+		System.out.println(answers.StringsAreAnagrams(anagram1, anagram2)); //true
+		System.out.println(answers.StringsAreAnagrams(anagram1, noDuplicates)); //false
 		
 	}
 	
