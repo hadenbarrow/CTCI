@@ -5,6 +5,20 @@ import java.util.HashSet;
 
 public class Answers {
 	
+	//1.5 Write a method to replace all spaces in a string with "%20"
+	public String replaceSpaces(String input) {
+		for(int i = 0; i < input.length(); i++) {
+			char temp = input.charAt(i);
+			if(temp == ' '){
+				String first = input.substring(0,i);
+				String middle = "%20";
+				String end = input.substring(i+1, input.length());
+				input = first+middle+end;
+			}
+		}
+		return input;
+	}
+	
 	//1.4 Write a method to decide if two strings are anagrams or not
 	public boolean StringsAreAnagrams(String input1, String input2) {
 		HashMap<Character, Integer> map1 = new HashMap<Character, Integer>();
@@ -124,8 +138,11 @@ public class Answers {
 		//System.out.println(answers.removeDuplicateCharacters(hasDuplicates));
 		
 		//1.4 tests
-		System.out.println(answers.StringsAreAnagrams(anagram1, anagram2)); //true
-		System.out.println(answers.StringsAreAnagrams(anagram1, noDuplicates)); //false
+		//System.out.println(answers.StringsAreAnagrams(anagram1, anagram2)); //true
+		//System.out.println(answers.StringsAreAnagrams(anagram1, noDuplicates)); //false
+		
+		//1.5 tests
+		System.out.println(answers.replaceSpaces(cStyle));
 		
 	}
 	
