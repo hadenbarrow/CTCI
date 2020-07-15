@@ -5,6 +5,31 @@ import java.util.HashSet;
 
 public class Answers {
 	
+	//1.7 Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column is set to 0.
+	public int[][] zero(int[][] input){
+		HashSet<Integer> rows = new HashSet<Integer>();
+		HashSet<Integer> columns = new HashSet<Integer>();
+		
+		for(int i = 0; i < input.length; i++) {
+			for(int j = 0; j < input[0].length; j++) {
+				if(input[i][j] == 0) {
+					rows.add(i);
+					columns.add(j);
+				}
+			}
+		}
+		
+		for(int i = 0; i < input.length; i++) {
+			for(int j = 0; j < input[0].length; j++) {
+				if(rows.contains(i) || columns.contains(j)) {
+					input[i][j] = 0;
+				}
+			}
+		}
+		
+		return input;
+	}
+	
 	//1.6 Rotate and NxN matrix 90 degrees
 	
 	public int[][] rotate(int[][] input) {
@@ -170,11 +195,20 @@ public class Answers {
 		//System.out.println(answers.replaceSpaces(cStyle));
 		
 		//1.6 tests
-		int[][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+		/*
+		 * int[][] arr = {{1,2,3},{4,5,6},{7,8,9}}; int[][] arr2 = {{1,2,3,4},
+		 * {5,6,7,8}, {9,10,11,12}, {13,14,15,16}}; answers.printMatrix(arr);
+		 * System.out.println(); answers.printMatrix(answers.rotate(arr));
+		 * 
+		 * answers.printMatrix(arr2); System.out.println();
+		 * answers.printMatrix(answers.rotate(arr2));
+		 */
+		
+		//1.7 tests
+		int[][] arr = {{0,1,2}, {3,4,5}, {6,7,8}};
 		answers.printMatrix(arr);
 		System.out.println();
-		answers.printMatrix(answers.rotate(arr));
-		
+		answers.printMatrix(answers.zero(arr));
 	}
 	
 }
