@@ -5,6 +5,31 @@ import java.util.HashSet;
 
 public class Answers {
 	
+	//1.6 Rotate and NxN matrix 90 degrees
+	
+	public int[][] rotate(int[][] input) {
+		int N = input.length;
+		for(int i = 0; i < N/2; i++) {
+			for(int j = i; j < N - i - 1; j++) {
+				int temp = input[i][j];
+				input[i][j] = input[N - j - 1][i];
+				input[N - j - 1][i] = input[N - i - 1][N - j - 1];
+				input[N - i - 1][N - j - 1] = input[j][N - i - 1];
+				input[j][N - i - 1] = temp;
+			}
+		}
+		return input;
+	}
+	
+	public void printMatrix(int[][] input) {
+		for(int i = 0; i < input.length; i++) {
+			for(int j = 0; j < input.length; j++) {
+				System.out.print(input[i][j] + "");
+			}
+			System.out.println();
+		}
+	}
+	
 	//1.5 Write a method to replace all spaces in a string with "%20"
 	public String replaceSpaces(String input) {
 		for(int i = 0; i < input.length(); i++) {
@@ -142,7 +167,13 @@ public class Answers {
 		//System.out.println(answers.StringsAreAnagrams(anagram1, noDuplicates)); //false
 		
 		//1.5 tests
-		System.out.println(answers.replaceSpaces(cStyle));
+		//System.out.println(answers.replaceSpaces(cStyle));
+		
+		//1.6 tests
+		int[][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+		answers.printMatrix(arr);
+		System.out.println();
+		answers.printMatrix(answers.rotate(arr));
 		
 	}
 	
