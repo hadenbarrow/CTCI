@@ -31,19 +31,33 @@ public class Answers {
 	}
 	
 	//1.6 Rotate and NxN matrix 90 degrees
-	
-	public int[][] rotate(int[][] input) {
-		int N = input.length;
-		for(int i = 0; i < N/2; i++) {
-			for(int j = i; j < N - i - 1; j++) {
-				int temp = input[i][j];
-				input[i][j] = input[N - j - 1][i];
-				input[N - j - 1][i] = input[N - i - 1][N - j - 1];
-				input[N - i - 1][N - j - 1] = input[j][N - i - 1];
-				input[j][N - i - 1] = temp;
+	public int[][] rotate(int[][] matrix){
+		int N = matrix.length;
+		for(int layer = 0; layer < N/2; layer++) {
+			int first = layer;
+			int last = N - 1 - layer;
+			for(int i = first; i < last; i++) {
+				//how far away we are from first
+				int offset = i - first;
+				
+				//save the top left corner
+				int save = matrix[layer][i];
+				
+				//bottom left corner -> top left corner
+				matrix[layer][i] = matrix[last-offset][first];
+				
+				//bottom right corner -> bottom left corner
+				matrix[last-offset][first] = matrix[last][last-offset];
+				
+				//top right corner -> bottom right corner
+				matrix[last][last-offset] = matrix[i][last];
+				
+				//saved value -> top right corner
+				matrix[i][last] = save;
+				
 			}
 		}
-		return input;
+		return matrix;
 	}
 	
 	public void printMatrix(int[][] input) {
@@ -195,20 +209,19 @@ public class Answers {
 		//System.out.println(answers.replaceSpaces(cStyle));
 		
 		//1.6 tests
-		/*
-		 * int[][] arr = {{1,2,3},{4,5,6},{7,8,9}}; int[][] arr2 = {{1,2,3,4},
-		 * {5,6,7,8}, {9,10,11,12}, {13,14,15,16}}; answers.printMatrix(arr);
-		 * System.out.println(); answers.printMatrix(answers.rotate(arr));
-		 * 
-		 * answers.printMatrix(arr2); System.out.println();
-		 * answers.printMatrix(answers.rotate(arr2));
-		 */
+		int[][] arr = {{1,2,3},{4,5,6},{7,8,9}}; int[][] arr2 = {{1,2,3,4},
+		{5,6,7,8}, {9,10,11,12}, {13,14,15,16}}; answers.printMatrix(arr);
+		System.out.println(); answers.printMatrix(answers.rotate(arr));
+		  
+		answers.printMatrix(arr2); System.out.println();
+		answers.printMatrix(answers.rotate(arr2));
+		 
 		
 		//1.7 tests
-		int[][] arr = {{0,1,2}, {3,4,5}, {6,7,8}};
-		answers.printMatrix(arr);
-		System.out.println();
-		answers.printMatrix(answers.zero(arr));
+//		int[][] arr = {{0,1,2}, {3,4,5}, {6,7,8}};
+//		answers.printMatrix(arr);
+//		System.out.println();
+//		answers.printMatrix(answers.zero(arr));
 	}
 	
 }
