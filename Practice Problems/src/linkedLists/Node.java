@@ -32,6 +32,25 @@ public class Node {
 		return head;
 	}
 	
+	public int getNthToLast(Node head, int nth) {
+		Node n = head;
+		int size = 1;
+		
+		while(n.next != null) {
+			n = n.next;
+			size++;
+		}
+		
+		n = head;
+		int current = 0;
+		while(current != size - nth) {
+			n = n.next;
+			current++;
+		}
+		
+		return n.data;
+	}
+	
 	public Node removeDuplicates(Node head) {
 		HashSet<Integer> seen = new HashSet<Integer>();
 		Node n = head;
@@ -100,5 +119,9 @@ public class Node {
 			System.out.println(n.data);
 			n = n.next;
 		}
+		
+		System.out.println();
+		
+		System.out.println(start.getNthToLast(start, 3));
 	}
 }
