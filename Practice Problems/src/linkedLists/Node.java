@@ -40,8 +40,10 @@ public class Node {
 		while(n.next != null) {
 			if(seen.contains(n.next.data)) {
 				n.next = n.next.next;
+				continue;
 			}
 			seen.add(n.next.data);
+			
 			n = n.next;
 		}
 		return head;
@@ -80,6 +82,16 @@ public class Node {
 		start.appendToTail(1);
 		start.appendToTail(2);
 		start.appendToTail(3);
+		
+		System.out.println("Before removing duplicates");
+		
+		n = start;
+		while(n != null) {
+			System.out.println(n.data);
+			n = n.next;
+		}
+		
+		System.out.println("After removing duplicates");
 		
 		start.removeDuplicates(start);
 		
