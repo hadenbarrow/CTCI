@@ -81,7 +81,7 @@ public class Node {
 		start.appendToTail(2);
 		start.appendToTail(3);
 		
-		//start.removeDuplicates(start);
+		start.removeDuplicates(start);
 		
 		n = start;
 		while(n != null) {
