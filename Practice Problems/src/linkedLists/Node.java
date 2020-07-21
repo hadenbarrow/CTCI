@@ -32,6 +32,32 @@ public class Node {
 		return head;
 	}
 	
+	//2.4
+	public Node sumLists(Node l1, Node l2) {
+		if(l1 == null) return l2;
+		if(l2 == null) return l1;
+		Node result = new Node(0);
+		Node N = result;
+		boolean carry = false;
+		
+		while(l1 != null || l2 != null) {
+			int sum = 0;
+			if(l1 != null) {sum += l1.data;}
+			if(l2 != null) {sum += l2.data;}
+			if(carry) {sum++;}
+			if(sum >= 10) {carry = true; sum -= 10;}
+			N.data = sum;
+			l1 = l1.next;
+			l2 = l2.next;
+			if(l1 != null || l2 != null) {
+				N.next = new Node(0);
+				N = N.next;
+			}
+		}
+		
+		return result;
+	}
+	
 	public int getNthToLast(Node head, int nth) {
 		Node n = head;
 		int size = 1;
@@ -75,53 +101,64 @@ public class Node {
 		start.appendToTail(2);
 		start.appendToTail(3);
 		
-		Node n = start;
-		while(n != null) {
-			System.out.println(n.data);
-			n = n.next;
+		Node start2 = new Node(3);
+		start2.appendToTail(2);
+		start2.appendToTail(1);
+		
+		Node sum = start.sumLists(start, start2);
+		while(sum != null) {
+			System.out.println(sum.data);
+			sum = sum.next;
 		}
 		
-		System.out.println("");
+//		Node n = start;
+//		while(n != null) {
+//			System.out.println(n.data);
+//			n = n.next;
+//		}
+//		
+//		System.out.println("");
+//		
+//		start.deleteNode(start, 2);
+//		start.deleteNode(start, 3);
+//		
+//		
+//		n = start;
+//		while(n != null) {
+//			System.out.println(n.data);
+//			n = n.next;
+//		}
+//		
+//		System.out.println();
+//		
+//		//add 3 back, also add 1,2,3 to test removing duplicates.
+//		start.appendToTail(2);
+//		start.appendToTail(3);
+//		start.appendToTail(1);
+//		start.appendToTail(2);
+//		start.appendToTail(3);
+//		
+//		System.out.println("Before removing duplicates");
+//		
+//		n = start;
+//		while(n != null) {
+//			System.out.println(n.data);
+//			n = n.next;
+//		}
+//		
+//		System.out.println("After removing duplicates");
+//		
+//		start.removeDuplicates(start);
+//		
+//		n = start;
+//		while(n != null) {
+//			System.out.println(n.data);
+//			n = n.next;
+//		}
+//		
+//		System.out.println();
+//		
+//		System.out.println(start.getNthToLast(start, 3));
 		
-		start.deleteNode(start, 2);
-		start.deleteNode(start, 3);
-		
-		
-		n = start;
-		while(n != null) {
-			System.out.println(n.data);
-			n = n.next;
-		}
-		
-		System.out.println();
-		
-		//add 3 back, also add 1,2,3 to test removing duplicates.
-		start.appendToTail(2);
-		start.appendToTail(3);
-		start.appendToTail(1);
-		start.appendToTail(2);
-		start.appendToTail(3);
-		
-		System.out.println("Before removing duplicates");
-		
-		n = start;
-		while(n != null) {
-			System.out.println(n.data);
-			n = n.next;
-		}
-		
-		System.out.println("After removing duplicates");
-		
-		start.removeDuplicates(start);
-		
-		n = start;
-		while(n != null) {
-			System.out.println(n.data);
-			n = n.next;
-		}
-		
-		System.out.println();
-		
-		System.out.println(start.getNthToLast(start, 3));
 	}
 }
