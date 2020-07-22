@@ -32,6 +32,21 @@ public class Node {
 		return head;
 	}
 	
+	//2.5
+	public Node findLoop(Node head) {
+		HashSet<Integer> seen = new HashSet<Integer>();
+		Node N = head;
+		while(N.next != null) {
+			if(seen.contains(N.data)) {
+				return N;
+			}else {
+				seen.add(N.data);
+			}
+			N = N.next;
+		}
+		return head;
+	}
+	
 	//2.4
 	public Node sumLists(Node l1, Node l2) {
 		if(l1 == null) return l2;
@@ -95,19 +110,35 @@ public class Node {
 	
 	
 	public static void main(String[] args) {
-		Node start = new Node(1);
-		start.appendToTail(2);
-		start.appendToTail(3);
+		Node A = new Node(0);
+		Node B = new Node(1);
+		Node C = new Node(2);
+		Node D = new Node(3);
+		Node E = new Node(4);
 		
-		Node start2 = new Node(9);
-		start2.appendToTail(9);
-		start2.appendToTail(9);
+		E.next = C; //setting up circular list.
+		D.next = E;
+		C.next = D;
+		B.next = C;
+		A.next = B;
 		
-		Node sum = start.sumLists(start, start2);
-		while(sum != null) {
-			System.out.println(sum.data);
-			sum = sum.next;
-		}
+		System.out.println(A.findLoop(A).data);
+		
+		
+//		Node start = new Node(5);
+//		start.appendToTail(6);
+//		start.appendToTail(7);
+//		
+//		Node start2 = new Node(4);
+//		start2.appendToTail(5);
+//		start2.appendToTail(6);
+//		start2.appendToTail(7);
+//		
+//		Node sum = start.sumLists(start, start2);
+//		while(sum != null) {
+//			System.out.println(sum.data);
+//			sum = sum.next;
+//		}
 		
 //		Node n = start;
 //		while(n != null) {
