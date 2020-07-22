@@ -36,25 +36,23 @@ public class Node {
 	public Node sumLists(Node l1, Node l2) {
 		if(l1 == null) return l2;
 		if(l2 == null) return l1;
+		
 		Node result = new Node(0);
 		Node N = result;
 		boolean carry = false;
-		
-		while(l1 != null || l2 != null) {
+		while(l1 != null || l2 != null || carry) {
 			int sum = 0;
-			if(l1 != null) {sum += l1.data;}
-			if(l2 != null) {sum += l2.data;}
-			if(carry) {sum++;}
-			if(sum >= 10) {carry = true; sum -= 10;}
+			if(l1 != null) {sum += l1.data; l1 = l1.next;}
+			if(l2 != null) {sum += l2.data; l2 = l2.next;}
+			if(carry) {sum++; carry = false;}
+			if(sum >= 10) {sum -= 10; carry = true;}
 			N.data = sum;
-			l1 = l1.next;
-			l2 = l2.next;
-			if(l1 != null || l2 != null) {
+			
+			if(l1 != null || l2 != null || carry) {
 				N.next = new Node(0);
 				N = N.next;
 			}
 		}
-		
 		return result;
 	}
 	
@@ -101,9 +99,9 @@ public class Node {
 		start.appendToTail(2);
 		start.appendToTail(3);
 		
-		Node start2 = new Node(3);
-		start2.appendToTail(2);
-		start2.appendToTail(1);
+		Node start2 = new Node(9);
+		start2.appendToTail(9);
+		start2.appendToTail(9);
 		
 		Node sum = start.sumLists(start, start2);
 		while(sum != null) {
