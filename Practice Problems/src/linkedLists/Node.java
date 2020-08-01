@@ -34,17 +34,15 @@ public class Node {
 	
 	//2.5
 	public Node findLoop(Node head) {
-		HashSet<Integer> seen = new HashSet<Integer>();
-		Node N = head;
-		while(N.next != null) {
-			if(seen.contains(N.data)) {
-				return N;
-			}else {
-				seen.add(N.data);
-			}
-			N = N.next;
+		Node fast = head;
+		Node slow = head;
+		
+		while(fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if(slow == fast) break;
 		}
-		return head;
+		return fast;
 	}
 	
 	//2.4
